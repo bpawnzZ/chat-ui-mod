@@ -1,9 +1,9 @@
-import type { Message } from "$lib/types/Message";
+import type { Message } from "../../../types/Message";
 import { format } from "date-fns";
 import type { EndpointMessage } from "../../endpoints/endpoints";
 import { generateFromDefaultEndpoint } from "../../generateFromDefaultEndpoint";
 
-export async function generateQuery(messages: Message[]) {
+export async function generateQuery(messages: Message[], conversationId: string) {
 	const currentDate = format(new Date(), "MMMM d, yyyy");
 	const userMessages = messages.filter(({ from }) => from === "user");
 	const previousUserMessages = userMessages.slice(0, -1);
@@ -68,6 +68,7 @@ Current Question: Where is it being hosted?`,
 		generateSettings: {
 			max_new_tokens: 30,
 		},
+		contextId: `websearch_${conversationId}`,
 	});
 
 	return webQuery.trim();

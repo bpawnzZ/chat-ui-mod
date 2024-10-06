@@ -1,4 +1,4 @@
-import { runWebSearch } from "$lib/server/websearch/runWebSearch";
+import { runWebSearch } from "../websearch/runWebSearch";
 import { preprocessMessages } from "../endpoints/preprocessMessages";
 
 import { generateTitleForConversation } from "./title";
@@ -9,16 +9,16 @@ import {
 	processPreprompt,
 } from "./assistant";
 import { getTools, runTools } from "./tools";
-import type { WebSearch } from "$lib/types/WebSearch";
+import type { WebSearch } from "../../types/WebSearch";
 import {
 	type MessageUpdate,
 	MessageUpdateType,
 	MessageUpdateStatus,
-} from "$lib/types/MessageUpdate";
+} from "../../types/MessageUpdate";
 import { generate } from "./generate";
-import { mergeAsyncGenerators } from "$lib/utils/mergeAsyncGenerators";
+import { mergeAsyncGenerators } from "../../utils/mergeAsyncGenerators";
 import type { TextGenerationContext } from "./types";
-import type { ToolResult } from "$lib/types/Tool";
+import type { ToolResult } from "../../types/Tool";
 import { toolHasName } from "../tools/utils";
 
 async function* keepAlive(done: AbortSignal): AsyncGenerator<MessageUpdate, undefined, undefined> {
